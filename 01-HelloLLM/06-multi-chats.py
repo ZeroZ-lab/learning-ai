@@ -15,20 +15,21 @@ messages = [
 
 messages.append({"role": "user", "content": """ 你好！世界上有几个大洋？ """})
 
+# Round 1
+print("Round 1 对话开始：")
 response = client.chat.completions.create(
     model="deepseek-v3", messages=messages, stream=False
 )
 
-# Round 1
+print(f"Round 1 助手回复：{response.choices[0].message.content}")
+print("Round 1 对话结束\n")
+
 messages.append(
     {
         "role": "assistant",
         "content": response.choices[0].message.content,
     }
 )
-
-print(f"Messages Round 1: {messages}")
-print(f"Messages Round 1 Assistant: {response.choices[0].message.content}")
 
 # Round 2
 messages.append(
@@ -38,9 +39,10 @@ messages.append(
     }
 )
 
+print("Round 2 对话开始：")
 response = client.chat.completions.create(
     model="deepseek-v3", messages=messages, stream=False
 )
 
-print(f"Messages Round 2: {messages}")
-print(f"Messages Round 2 Assistant: {response.choices[0].message.content}")
+print(f"Round 2 助手回复：{response.choices[0].message.content}")
+print("Round 2 对话结束")
