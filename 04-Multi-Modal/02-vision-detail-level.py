@@ -5,7 +5,7 @@ import base64
 
 load_dotenv()
 
-# 因为网络问题，使用阿里云平台中的DeepSeek代替
+
 client = OpenAI(
     api_key=os.getenv("OPENROUTER_API_KEY"), base_url=os.getenv("OPENROUTER_BASE_URL")
 )
