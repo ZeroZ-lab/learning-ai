@@ -34,5 +34,7 @@ for chunk in response:
     elif answer_chunk is not None and answer_chunk != "":
         print(answer_chunk,end="")
         answer_content += answer_chunk
+
+        
 print(f"\n完整思考过程：{reasoning_content}")
 print(f"完整的回复：{answer_content}")
