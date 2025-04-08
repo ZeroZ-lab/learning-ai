@@ -24,7 +24,7 @@ response_format 参数 ： 指定输出格式
 
 # 使用 DeepSeek API
 client = OpenAI(
-    api_key=os.getenv("DEEPSEEK_API_KEY"), base_url=os.getenv("DEEPSEEK_BASE_URL")
+    api_key=os.getenv("OPENROUTER_API_KEY"), base_url=os.getenv("OPENROUTER_BASE_URL")
 )
 
 system_prompt = """
@@ -47,9 +47,10 @@ messages = [
     {"role": "user", "content": user_prompt},
 ]
 
-response = client.completions.create(
+response = client.chat.completions.create(
     model="deepseek/deepseek-chat",
-    prompt=user_prompt,
+    messages=messages,
+    response_format={"type": "json_object"},
     max_tokens=1000,
     temperature=0.7
 )
@@ -57,5 +58,5 @@ response = client.completions.create(
 # 打印完整的响应信息，方便调试
 print("完整响应：", response)
 # 解析 JSON 并美化输出
-json_data = json.loads(response.choices[0].text)
+json_data = json.loads(response.choices[0].message.content)
 print(json.dumps(json_data, indent=4, ensure_ascii=False))

@@ -14,7 +14,7 @@ class EmbeddingProcessor:
     02-01: 向量化处理器
     使用阿里云API进行文本向量化，FAISS进行向量存储和检索
     """
-    def __init__(self, model: str = "text-embedding-v3", dimension: int = 1536):
+    def __init__(self, model: str = "text-embedding-v3", dimension: int = 1024):
         """
         初始化向量化处理器
         
@@ -92,28 +92,40 @@ class EmbeddingProcessor:
             texts (List[str]): 文本列表
             metadata (List[Dict[str, Any]]): 元数据列表
         """
-        # 过滤掉无效的向量
+        # 步骤1: 验证输入数据的完整性
+        if len(embeddings) != len(texts) or len(embeddings) != len(metadata):
+            raise ValueError("输入列表长度不匹配")
+            
+        # 步骤2: 初始化存储有效数据的列表
         valid_embeddings = []
         valid_texts = []
         valid_metadata = []
         
+        # 步骤3: 过滤无效向量并收集有效数据
         for emb, text, meta in zip(embeddings, texts, metadata):
             if emb is not None:
                 valid_embeddings.append(emb)
                 valid_texts.append(text)
                 valid_metadata.append(meta)
         
+        # 步骤4: 检查是否有有效向量
         if not valid_embeddings:
             raise ValueError("没有有效的向量可以构建索引")
             
-        # 转换为numpy数组
+        # 步骤5: 将向量列表转换为numpy数组并确保数据类型
         embeddings_array = np.array(valid_embeddings).astype('float32')
         
-        # 创建FAISS索引
+        # 步骤6: 验证向量维度是否匹配
+        if embeddings_array.shape[1] != self.dimension:
+            raise ValueError(f"向量维度不匹配: 期望 {self.dimension}, 实际 {embeddings_array.shape[1]}")
+        
+        # 步骤7: 创建FAISS索引（使用欧几里得距离）
         self.index = faiss.IndexFlatL2(self.dimension)
+        
+        # 步骤8: 将向量添加到索引中
         self.index.add(embeddings_array)
         
-        # 保存文本和元数据
+        # 步骤9: 保存文本和元数据供后续检索使用
         self.texts = valid_texts
         self.metadata = valid_metadata
         
