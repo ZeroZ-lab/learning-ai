@@ -1,6 +1,6 @@
 # Learning AI
 
-## TLDR
+## TLDR;
 
 这是一个 AI 学习项目，包含从基础到高级的多个实践模块：
 - 🤖 LLM 基础对话
