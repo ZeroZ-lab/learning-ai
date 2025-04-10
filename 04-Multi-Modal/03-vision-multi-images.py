@@ -10,16 +10,6 @@ client = OpenAI(
     api_key=os.getenv("OPENROUTER_API_KEY"), base_url=os.getenv("OPENROUTER_BASE_URL")
 )
 
-IMAGE_PATH = "./04-Multi-Modal/data/image-1.png"
-
-
-def encode_image(image_path):
-    with open(image_path, "rb") as image_file:
-        return base64.b64encode(image_file.read()).decode("utf-8")
-
-
-base64_image = encode_image(IMAGE_PATH)
-
 response = client.chat.completions.create(
     model="openai/gpt-4o-mini",
     messages=[

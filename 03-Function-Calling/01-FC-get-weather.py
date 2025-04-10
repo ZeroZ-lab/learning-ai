@@ -69,12 +69,11 @@ messages = [
 ]
 message = send_messages(messages)
 
-print(f"User>\t {messages[0]['content']}")
+print(f"\n👤 User>\t {messages[1]['content']}")
 
-## 查看返回的 tool_calls 是否有内容，并打印出来
-
+# 查看返回的 tool_calls 是否有内容，并打印出来
 tool_calls = message.tool_calls
-print(f"Tool Calls>\t {tool_calls}")
+print(f"\n🛠️ Tool Calls>\t {tool_calls}")
 
 if tool_calls:
     messages.append({"role": "assistant", "content": "", "tool_calls": tool_calls})
@@ -91,11 +90,11 @@ if tool_calls:
                 "content": str(function_response)
             }
         )
-        print(f"Tool Call>\t {tool_call}")
-        print(f"Function Name>\t {function_name}")
-        print(f"Function Args>\t {function_args}")
-        print(f"Function Response>\t {function_response}")
+        print(f"\n🔧 Tool Call>\t {tool_call}")
+        print(f"📝 Function Name>\t {function_name}")
+        print(f"📋 Function Args>\t {function_args}")
+        print(f"📊 Function Response>\t {function_response}")
 
-    print(f"Messages>\t {messages}")
+    print(f"\n📨 Messages>\t {messages}")
     second_message = send_messages(messages)
-    print(f"Second Message>\t {second_message}")
+    print(f"\n🤖 Second Message>\t {second_message}")

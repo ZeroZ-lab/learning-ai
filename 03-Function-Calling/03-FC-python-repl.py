@@ -177,7 +177,7 @@ while True:
 
     # 如果没有工具调用，直接打印回复并退出
     if not message.tool_calls:
-        print(f"Assistant>\t {message.content}")
+        print(f"\n🤖 Assistant>\t {message.content}")
         break
 
     # 处理工具调用
@@ -208,7 +208,7 @@ while True:
                 "content": str(function_response),
             }
         )
-        print(f"Tool Call>\t {tool_call}")
-        print(f"Function Name>\t {function_name}")
-        print(f"Function Args>\t {function_args}")
-        print(f"Function Response>\t {function_response}")
+        print(f"\n🛠️ Tool Call>\t {tool_call}")
+        print(f"📝 Function Name>\t {function_name}")
+        print(f"📋 Function Args>\t {function_args}")
+        print(f"📊 Function Response>\t {function_response}")

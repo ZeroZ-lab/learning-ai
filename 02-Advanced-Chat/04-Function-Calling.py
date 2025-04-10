@@ -65,12 +65,14 @@ tools = [
 ]
 
 messages = [{"role": "user", "content": "How's the weather in Hangzhou?"}]
-message = send_messages(messages)
-print(f"User>\t {messages[0]['content']}")
+print(f"\n👤 User>\t {messages[0]['content']}")
 
+message = send_messages(messages)
+# 打印工具调用信息
+print(f"\n🛠️ Tool>\t {message.tool_calls[0]}")
 tool = message.tool_calls[0]
 messages.append(message)
-
+# 模拟工具调用，实际调用的是get_weather函数
 messages.append({"role": "tool", "tool_call_id": tool.id, "content": "24℃"})
 message = send_messages(messages)
-print(f"Model>\t {message.content}")
+print(f"\n🤖 Model>\t {message.content}")
