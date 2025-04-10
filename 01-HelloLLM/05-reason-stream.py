@@ -4,8 +4,11 @@ import os
 
 load_dotenv()
 
-
 client = OpenAI(api_key=os.getenv("DEEPSEEK_API_KEY"),base_url=os.getenv("DEEPSEEK_BASE_URL"))
+
+print("\n" + "="*50)
+print("🤖 开始流式推理过程")
+print("="*50)
 
 response = client.chat.completions.create(
     model="deepseek-r1",
@@ -21,6 +24,10 @@ response = client.chat.completions.create(
 reasoning_content = ""
 # 定义完整回复
 answer_content = ""
+
+print("\n💭 思考过程：")
+print("-"*30)
+
 for chunk in response:
     # 获取思考过程
     reasoning_chunk = chunk.choices[0].delta.reasoning_content
@@ -32,9 +39,18 @@ for chunk in response:
         reasoning_content += reasoning_chunk
     # 如果回复不为空，则打印回复。回复一般会在思考过程结束后返回
     elif answer_chunk is not None and answer_chunk != "":
+        print("\n\n💡 最终答案：")
+        print("✨"*20)
         print(answer_chunk,end="")
         answer_content += answer_chunk
 
-        
-print(f"\n完整思考过程：{reasoning_content}")
-print(f"完整的回复：{answer_content}")
+print("\n\n" + "="*50)
+print("📝 完整输出：")
+print("="*50)
+print("\n🤔 思考过程：")
+print("-"*30)
+print(reasoning_content)
+print("\n💡 最终答案：")
+print("-"*30)
+print(answer_content)
+print("\n" + "="*50)

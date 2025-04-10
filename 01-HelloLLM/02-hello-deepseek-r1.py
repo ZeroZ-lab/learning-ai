@@ -16,9 +16,20 @@ response = client.chat.completions.create(
     stream=False
 )
 
+# 打印分隔线
+print("\n" + "="*50)
+
 # 通过reasoning_content字段打印思考过程
-print("思考过程：")
+print("🤔 思考过程：")
+print("-"*30)
 print(response.choices[0].message.reasoning_content)
+print("-"*30)
+
 # 通过content字段打印最终答案
-print("最终答案：")
+print("\n💡 最终答案：")
+print("✨"*20)
 print(response.choices[0].message.content)
+print("✨"*20)
+
+# 打印分隔线
+print("\n" + "="*50)
