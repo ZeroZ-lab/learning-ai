@@ -61,7 +61,8 @@ for chunk in response:
         print(content, end="", flush=True)
         full_response += content
 
-print("\n✨"*20)
+print("\n")
+print("✨"*20)
 print("Round 1 对话结束\n")
 
 # 将完整回复添加到消息历史
@@ -89,7 +90,8 @@ for chunk in response:
         print(content, end="", flush=True)
         full_response += content
 
-print("\n✨"*20)
+print("\n")
+print("✨"*20)
 print("Round 2 对话结束")
 
 # 将第二轮回复添加到消息历史

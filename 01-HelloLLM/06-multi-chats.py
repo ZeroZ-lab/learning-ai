@@ -87,6 +87,13 @@ print(response.choices[0].message.content)
 print("✨"*20)
 print("Round 2 对话结束")
 
+messages.append(
+    {
+        "role": "assistant",
+        "content": response.choices[0].message.content,
+    }
+)
+
 print("\n" + "="*50)
 print("📝 对话历史")
 print("="*50)

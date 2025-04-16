@@ -23,6 +23,8 @@ OpenAI 的一个重要贡献是标准化了大语言模型（LLM）的 API 接�
 
 ## 💻 示例代码
 
+### 🐍 使用 SDK
+
 ```python
 from openai import OpenAI
 
@@ -37,6 +39,21 @@ response = client.chat.completions.create(
 )
 
 print(response.choices[0].message.content)
+```
+
+### 🌐 HTTP 直接调用
+
+```bash
+curl https://api.openai.com/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $OPENAI_API_KEY" \
+  -d '{
+    "model": "gpt-3.5-turbo",
+    "messages": [
+      {"role": "system", "content": "You are a helpful assistant."},
+      {"role": "user", "content": "Hello!"}
+    ]
+  }'
 ```
 
 ## ✨ 优势

@@ -52,27 +52,27 @@ for chunk in response:
 print("\n\n完整回答:")
 print(content)
 
-# 示例2：更复杂的推理问题
-print("\n" + "="*50)
-print("🤖 示例2：复杂的推理问题")
-print("="*50)
+# # 示例2：更复杂的推理问题
+# print("\n" + "="*50)
+# print("🤖 示例2：复杂的推理问题")
+# print("="*50)
 
-response = client.chat.completions.create(
-    model="deepseek-v3",
-    messages=[
-        {"role": "system", "content": "You are a helpful assistant"},
-        {"role": "user", "content": """请解释一下为什么太阳从东边升起，西边落下？"""},
-    ],
-    stream=True
-)
+# response = client.chat.completions.create(
+#     model="deepseek-v3",
+#     messages=[
+#         {"role": "system", "content": "You are a helpful assistant"},
+#         {"role": "user", "content": """请解释一下为什么太阳从东边升起，西边落下？"""},
+#     ],
+#     stream=True
+# )
 
-content = ""
-for chunk in response:
-    if chunk.choices[0].delta.content is not None:
-        content_piece = chunk.choices[0].delta.content
-        print(content_piece, end="")
-        content += content_piece
+# content = ""
+# for chunk in response:
+#     if chunk.choices[0].delta.content is not None:
+#         content_piece = chunk.choices[0].delta.content
+#         print(content_piece, end="")
+#         content += content_piece
 
-print("\n\n完整回答:")
-print(content)
+# print("\n\n完整回答:")
+# print(content)
 

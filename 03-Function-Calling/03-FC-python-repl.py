@@ -44,11 +44,6 @@ def search_city_code(args):
             "./03-Function-Calling/data/AMap_adcode_citycode.xlsx", engine="openpyxl"
         )
 
-        # 打印前几行数据，用于调试
-        print("Debug - First few rows of dataframe:")
-        print(df.head())
-        print("\nDebug - Column names:", df.columns.tolist())
-
         # 使用模糊匹配
         result = df[df.iloc[:, 0].str.contains(city_name, na=False)]
         if not result.empty:
@@ -188,6 +183,8 @@ while True:
             "tool_calls": message.tool_calls,
         }
     )
+
+    print(f"\n🛠️ Tool Calls>\t {message.tool_calls}")
 
     # 执行所有工具调用
     for tool_call in message.tool_calls:
